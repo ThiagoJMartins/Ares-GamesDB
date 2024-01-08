@@ -1,5 +1,4 @@
 const { DataTypes } = require("sequelize");
-const currentDate = require("../helpers/getCurrentDate");
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
@@ -47,7 +46,6 @@ module.exports = (sequelize) => {
 			allowNull: false,
 			validate: {
 				isDate: true,
-				isBefore: currentDate,
 			},
 		},
 		rating: {
