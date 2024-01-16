@@ -1,20 +1,15 @@
 const { Videogame, Genres } = require("../db");
-const { Sequelize } = require("sequelize");
+const { Op } = require("sequelize");
 
 const seachDBByName = async (name) => {
 	try {
-		const findVideogame = await Videogame.findOne({
-			where: Sequelize.where(
-				Sequelize.fn("lower", Sequelize.col("videogame.name")),
-				Sequelize.fn("lower", name)
-			),
-			include: {
-				attributes: ["name"],
-				model: Genres,
-				through: {
-					attributes: [],
+		const findVideogame = await Videogame.findAll({
+			where: {
+				name: {
+					[Op.iLike]: `%${name}%`,
 				},
 			},
+			include: Genres,
 		});
 		return findVideogame;
 	} catch (error) {
