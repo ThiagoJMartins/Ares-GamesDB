@@ -15,7 +15,36 @@ const GetAllVideogames = async () => {
 		pageNum++;
 	}
 
-	return videogames;
+	const gamesFiltered = videogames.map((game) => {
+		const {
+			id,
+			name,
+			background_image,
+			parent_platforms,
+			description,
+			metacritic,
+			released,
+			genres,
+		} = game;
+
+		const platforms = parent_platforms.map(
+			(platform) => platform.platform.name
+		);
+		const genresNames = genres.map((genre) => genre.name);
+
+		return {
+			id,
+			name,
+			background_image,
+			platforms,
+			description,
+			metacritic,
+			released,
+			genres: genresNames,
+		};
+	});
+
+	return gamesFiltered;
 };
 
 module.exports = GetAllVideogames;

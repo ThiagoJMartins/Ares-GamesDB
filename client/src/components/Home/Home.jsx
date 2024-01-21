@@ -40,8 +40,7 @@ const Home = () => {
 							name={game.name}
 							image={game.background_image}
 							genres={game.genres}
-							platforms={game.platforms}
-							released_date={game.released}
+							released={game.released}
 							rating={game.metacritic}
 						/>
 					);

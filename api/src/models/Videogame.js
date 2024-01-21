@@ -27,28 +27,28 @@ module.exports = (sequelize) => {
 				len: [10, 256],
 			},
 		},
-		platform: {
-			type: DataTypes.STRING,
+		platforms: {
+			type: DataTypes.ARRAY(DataTypes.STRING),
 			allowNull: false,
 			validate: {
 				notEmpty: true,
 				len: [2, 40],
 			},
 		},
-		image: {
+		background_image: {
 			type: DataTypes.STRING,
 			validate: {
 				isUrl: true,
 			},
 		},
-		released_date: {
-			type: DataTypes.DATE,
+		released: {
+			type: DataTypes.STRING,
 			allowNull: false,
 			validate: {
 				isDate: true,
 			},
 		},
-		rating: {
+		metacritic: {
 			type: DataTypes.INTEGER,
 			defaultValue: 0,
 			allowNull: false,

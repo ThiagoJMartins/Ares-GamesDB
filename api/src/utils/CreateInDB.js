@@ -2,20 +2,20 @@ const { Videogame, Genres } = require("../db");
 
 const CreateInDB = async (
 	name,
-	image,
+	background_image,
 	description,
 	genres,
-	platform,
-	released_date,
-	rating
+	platforms,
+	released,
+	metacritic
 ) => {
 	const newGame = await Videogame.create({
 		name,
-		image,
+		background_image,
 		description,
-		platform,
-		released_date,
-		rating,
+		platforms,
+		released,
+		metacritic,
 	});
 
 	const genresVG = await Promise.all(
@@ -25,6 +25,13 @@ const CreateInDB = async (
 		})
 	);
 	await newGame.setGenres(genresVG);
+
+	const data = await Videogame.findOne({
+		where: { name: name },
+		include: Genres,
+	});
+
+	return data;
 };
 
 module.exports = CreateInDB;

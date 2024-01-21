@@ -19,12 +19,12 @@ const searchApi = async () => {
 						return {
 							id: vg.data.id,
 							name: vg.data.name,
-							image: vg.data.image,
-							desc: vg.data.description,
+							background_image: vg.data.background_image,
+							description: vg.data.description,
 							genres: vg.data.genres.map((genre) => genre.name),
-							plats: vg.data.platforms.map((plat) => plat.platform.name),
-							release: vg.data.released,
-							rating: vg.data.metacritic,
+							platforms: vg.data.platforms.map((plat) => plat.platform.name),
+							released: vg.data.released,
+							metacritic: vg.data.metacritic ?? 0,
 						};
 					});
 				})

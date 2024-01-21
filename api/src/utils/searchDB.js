@@ -1,11 +1,11 @@
-const { Videogame, Genre } = require("../src/db");
+const { Videogame, Genres } = require("../src/db");
 
 const searchDB = async () => {
 	try {
 		const videogamesArr = await Videogame.findAll({
 			include: {
 				attributes: ["name"],
-				model: Genre,
+				model: Genres,
 				through: {
 					attributes: [],
 				},

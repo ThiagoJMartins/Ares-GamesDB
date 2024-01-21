@@ -12,12 +12,12 @@ const searchApiById = async (id) => {
 			return {
 				id: vg.data.id,
 				name: vg.data.name,
-				image: vg.data.background_image,
-				desc: vg.data.description,
+				background_image: vg.data.background_image,
+				description: vg.data.description,
 				genres: vg.data.genres.map((genre) => genre.name),
-				plats: vg.data.platforms.map((plat) => plat.platform.name),
-				release: vg.data.released,
-				rating: vg.data.metacritic,
+				platforms: vg.data.platforms.map((plat) => plat.platform.name),
+				released: vg.data.released,
+				metacritic: vg.data.metacritic,
 			};
 		} else {
 			return null;
