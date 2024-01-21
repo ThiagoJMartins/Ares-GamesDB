@@ -1,13 +1,21 @@
 import axios from "axios";
 import {
-	GETVG,
+	GETALLVG,
+	GETVGNAME,
+	GETVGID,
+	POSTVG,
 	GETGENRES,
-	FINDVG,
-	RESET_SEARCH,
-	MODIFYPAGE,
-	BOTTOMPAGE,
-	TOPAGE,
+	ADVANCEPAGE,
+	MINPAGE,
+	MAXPAGE,
+	FILTERGENRES,
+	FILTERORIGIN,
+	ORDERABC,
+	ORDERRATING,
+	RESET,
 } from "./action-types.js";
+
+//*VIDEOGAMES
 
 export function getVideogames() {
 	return async (dispatch) => {
@@ -15,7 +23,23 @@ export function getVideogames() {
 			const { data } = await axios.get("http://localhost:3001/videogames");
 
 			return dispatch({
-				type: GETVG,
+				type: GETALLVG,
+				payload: data,
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+export function getVideogameByName(name) {
+	return async (dispatch) => {
+		try {
+			const { data } = await axios.get(
+				`http://localhost:3001/videogames?name=${name}`
+			);
+
+			return dispatch({
+				type: GETVGNAME,
 				payload: data,
 			});
 		} catch (error) {
@@ -24,65 +48,106 @@ export function getVideogames() {
 	};
 }
 
-export function getGenres() {
-	return function (dispatch) {
-		axios
-			.get("http://localhost:3001/genres")
-			.then((response) => {
-				// ordenamiento alfabetico de los types
-				response.data.sort(function (a, b) {
-					return a.name.localeCompare(b.name);
-				}); //
-				dispatch({
-					type: GETGENRES,
-					payload: response.data, // recibe un arreglo de pokemons
-				});
-			}) // cacth generar un dispatch un error
-			.catch((error) => {
-				console.log("Error connection BACK");
-			});
-	};
-}
-
-export function resetSearch() {
-	return {
-		type: RESET_SEARCH,
-		payload: false,
-	};
-}
-
-export function searchVideogame(name) {
-	return async function (dispatch) {
+export function getVideogameById(id) {
+	return async (dispatch) => {
 		try {
-			const vgSearch = axios.get(
-				`http://localhost:3001/videogames?name=${name}`
+			const { data } = await axios.get(
+				`http://localhost:3001/videogames/${id}`
 			);
+
 			return dispatch({
-				type: FINDVG,
-				payload: (await vgSearch).data,
+				type: GETVGID,
+				payload: data,
 			});
-		} catch ({ response }) {
-			alert(response.data.message);
+		} catch (error) {
+			console.log(error);
 		}
 	};
 }
 
-// Pagination
+export function postVideogame() {
+	return async (dispatch) => {
+		try {
+			const { data } = await axios.post("http://localhost:3001/videogames");
 
-export function modifyPage(value) {
+			return dispatch({
+				type: POSTVG,
+				payload: data,
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+//*GENRES
+
+export function getGenres() {
+	return async function (dispatch) {
+		try {
+			const genresSearch = axios.get(`http://localhost:3001/genres`);
+			return dispatch({
+				type: GETGENRES,
+				payload: (await genresSearch).data,
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+//*PAGINATION
+
+export function advancePage(value) {
 	return {
-		type: MODIFYPAGE,
+		type: ADVANCEPAGE,
 		payload: value,
 	};
 }
 
-export function topPage() {
+export function maxPage() {
 	return {
-		type: TOPAGE,
+		type: MAXPAGE,
 	};
 }
-export function bottomPage() {
+export function minPage() {
 	return {
-		type: BOTTOMPAGE,
+		type: MINPAGE,
+	};
+}
+
+//*FILTER & ORDERS
+
+export function filterGenres(genre) {
+	return {
+		type: FILTERGENRES,
+		payload: genre,
+	};
+}
+
+export function filterOrigin(origin) {
+	return {
+		type: FILTERORIGIN,
+		payload: origin,
+	};
+}
+
+export function orderAbc(order) {
+	return {
+		type: ORDERABC,
+		payload: order,
+	};
+}
+
+export function orderRating(rating) {
+	return {
+		type: ORDERRATING,
+		payload: rating,
+	};
+}
+
+export function reset() {
+	return {
+		type: RESET,
 	};
 }

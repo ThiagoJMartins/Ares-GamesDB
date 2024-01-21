@@ -36,19 +36,17 @@ const SearchBar = () => {
 	return (
 		<div>
 			<div>
-				{
-					<div>
-						<form onSubmit={onSubmit}>
-							<input
-								type="text"
-								value={search}
-								onChange={onChange}
-								placeholder="Find your videogame"
-							/>
-						</form>
-						<button type="submit">🔎</button>
-					</div>
-				}
+				<div>
+					<form onSubmit={onSubmit}>
+						<input
+							type="text"
+							value={search}
+							onChange={onChange}
+							placeholder="Find your videogame"
+						/>
+					</form>
+					<button type="submit">🔎</button>
+				</div>
 			</div>
 		</div>
 	);

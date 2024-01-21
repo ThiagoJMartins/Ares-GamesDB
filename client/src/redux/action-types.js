@@ -1,9 +1,20 @@
-export const GETVG = "GETVG";
-export const GETGENRES = "GETGENRES";
-export const FINDVG = "FINDVG";
-export const RESET_SEARCH = "RESET_SEARCH";
+//*VIDEOGAMES
+export const GETVGNAME = "GETVGNAME";
+export const GETVGID = "GETVGID";
+export const GETALLVG = "GETALLVG";
+export const POSTVG = "POSTVG";
 
-//Pagination
-export const MODIFYPAGE = "MODIFYPAGE";
-export const TOPAGE = "TOPAGE";
-export const BOTTOMPAGE = "BOTTOMPAGE";
+//*GENRES
+export const GETGENRES = "GETGENRES";
+
+//*PAGINATION
+export const ADVANCEPAGE = "ADVANCEPAGE";
+export const MINPAGE = "MINPAGE";
+export const MAXPAGE = "MAXAGE";
+
+//*FILTER & ORDER
+export const FILTERGENRES = "FILTERGENRES";
+export const FILTERORIGIN = "FILTERORIGIN";
+export const ORDERABC = "ORDERABC";
+export const ORDERRATING = "ORDERRATING";
+export const RESET = "RESET";

@@ -1,22 +1,22 @@
-import { useDispatch, useSelector, UseSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import Videogame from "../Videogame/Videogame";
 import { getVideogames, getGenres } from "../../redux/actions";
 import style from "./Home.module.scss";
-import { Link, useSearchParams } from "react-router-dom";
+import Videogame from "../Videogame/Videogame";
 import Pagination from "../Pagination/Pagination";
+import Orders from "../Orders/Orders";
+import Filters from "../Filters/Filters";
 
 const Home = () => {
 	const videogames = useSelector((state) => state.filteredVideogames);
+	const genres = useSelector((state) => state.genres);
 	const dispatch = useDispatch();
-	const currentPage = parseInt(useSelector((state) => state.currentPage));
-	const itemsByPage = parseInt(useSelector((state) => state.itemsByPage));
-	const totalVideogames = parseInt(
-		useSelector((state) => state.totalVideogames)
-	);
+	const actualPage = useSelector((state) => state.actualPage);
+	const totalVideogames = useSelector((state) => state.totalVideogames);
+	const gamesByPage = useSelector((state) => state.gamesByPage);
 
-	let start = (currentPage - 1) * itemsByPage;
-	let end = start + itemsByPage;
+	let start = (actualPage - 1) * gamesByPage;
+	let end = start + gamesByPage;
 	if (end > totalVideogames) end = totalVideogames;
 	if (start < 0) start = 0;
 
@@ -28,31 +28,27 @@ const Home = () => {
 	}, []);
 
 	return (
-		<div>
+		<div className={style.home}>
+			<Orders />
+			<Filters />
+			{videogames
+				.map((game) => {
+					return (
+						<Videogame
+							key={game.id}
+							id={game.id}
+							name={game.name}
+							image={game.background_image}
+							genres={game.genres}
+							platforms={game.platforms}
+							released_date={game.released}
+							rating={game.metacritic}
+						/>
+					);
+				})
+				.slice(start, end)}
 			<div>
-				<span>Ares-GamesDB</span>
-			</div>
-			<div>
-				{videogames
-					.map((videogame) => {
-						return (
-							<Link to={`/detail/${videogame.id}`} key={videogame.id}>
-								<Videogame
-									id={videogame.id}
-									name={videogame.name}
-									image={videogame.image}
-									genres={videogame.genres}
-									released_date={videogame.released_date}
-									rating={videogame.rating}
-									key={videogame.id}
-								/>
-							</Link>
-						);
-					})
-					.slice(start, end)}
-				<div>
-					<Pagination />
-				</div>
+				<Pagination />
 			</div>
 		</div>
 	);

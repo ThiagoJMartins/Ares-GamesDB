@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 //!----------------------------------------------------+/
 import logo from "/logo.svg";
-import SearchBar from "../SearchBar/SearchBar";
 //!----------------------------------------------------+/
 
 const Nav = () => {
@@ -10,7 +9,7 @@ const Nav = () => {
 			<div>
 				<div>
 					<Link to="/">
-						<img src={logo} alt="Ares_GamesDB" />
+						<img src={logo} alt="Ares_GamesDB" width="100px" />
 					</Link>
 					<div>
 						<ul>
@@ -24,11 +23,6 @@ const Nav = () => {
 								<Link to="/about">About</Link>
 							</li>
 						</ul>
-					</div>
-				</div>
-				<div>
-					<div>
-						<SearchBar />
 					</div>
 				</div>
 			</div>
