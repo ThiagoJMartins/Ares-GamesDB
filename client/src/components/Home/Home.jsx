@@ -23,6 +23,8 @@ const Home = () => {
 	useEffect(() => {
 		if (videogames.length === 0) {
 			dispatch(getVideogames());
+		}
+		if (genres.length === 0) {
 			dispatch(getGenres());
 		}
 	}, []);

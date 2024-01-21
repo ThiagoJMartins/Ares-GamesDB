@@ -17,9 +17,11 @@ const Filters = () => {
 		<div>
 			<select onChange={handleFilterGenres}>
 				<option value="allGenres">All Genres</option>
-				{genres.map((genre) => {
-					<option value={genre.name}>{genre.name}</option>;
-				})}
+				{genres.map((genre) => (
+					<option key={genre.id} value={genre.name.toUpperCase()}>
+						{genre.name}
+					</option>
+				))}
 			</select>
 			<select onChange={handleFilterOrigin}>
 				<option value="ALL">All</option>

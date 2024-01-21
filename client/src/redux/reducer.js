@@ -90,10 +90,14 @@ const rootReducer = (state = initialState, { type, payload }) => {
 			let backupGenre = [...state.videogames];
 			if (payload !== "allGenres") {
 				backupGenre = backupGenre.filter((game) => {
-					const extractGenre = game.genres.map((genre) => genre.name);
-					return extractGenre.includes(action.payload);
+					const GenresDB = game.genres.map((genre) => genre.name.toUpperCase());
+					return GenresDB.includes(payload);
 				});
 			}
+			return {
+				...state,
+				filteredVideogames: backupGenre,
+			};
 		}
 		case FILTERORIGIN:
 			let backupOrigin = [...state.videogames];

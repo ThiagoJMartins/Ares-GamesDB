@@ -30,7 +30,6 @@ const GetAllVideogames = async () => {
 		const platforms = parent_platforms.map(
 			(platform) => platform.platform.name
 		);
-		const genresNames = genres.map((genre) => genre.name);
 
 		return {
 			id,
@@ -40,7 +39,7 @@ const GetAllVideogames = async () => {
 			description,
 			metacritic,
 			released,
-			genres: genresNames,
+			genres,
 		};
 	});
 

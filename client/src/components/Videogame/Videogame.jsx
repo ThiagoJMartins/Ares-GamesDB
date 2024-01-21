@@ -15,7 +15,7 @@ const Videogame = ({ id, name, image, genres, released, rating }) => {
 			<div className={style.genres}>
 				{genres &&
 					genres.map((genre) => {
-						return <span key={genre.id}>{genre.name ?? genre} </span>;
+						return <span key={genre.id}>{genre.name} </span>;
 					})}
 			</div>
 			<div className={style.released}>{released}</div>
