@@ -1,0 +1,45 @@
+.searchbar {
+    background-color: white;
+    position: relative;
+    width: 245px;
+    height: 25px;
+    align-items: center;
+    border-radius: 6px;
+    align-items: center;
+    justify-items: center;
+
+    input {
+        border: inherit;
+        background-color: white;
+        font-size: 12px;
+        padding-left: 15px;
+        padding-top: 6px;
+        border-radius: 6px;
+        width: 225px;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &:hover {
+        transform: scale(1.1);
+        transition-duration: 0.5s;
+        box-shadow: 10px 10px 10px green;
+    }
+
+    &:not(:hover) {
+        transform: scale(1);
+        transition-duration: 0.5s;
+    }
+
+    .searchbutton {
+        font-size: 17px;
+        position: absolute;
+        border: none;
+        background-color: inherit;
+        border-radius: 7px;
+        right: 0;
+        cursor: pointer;
+    }
+}

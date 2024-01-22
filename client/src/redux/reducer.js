@@ -24,9 +24,29 @@ const initialState = {
 	gamesByPage: 15,
 	//*FILTER
 	filteredVideogames: [],
+	filterGames: false,
+	filterGenres: false,
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
+	const combinatedFilters = (filterGenre, filterOrigin) => {
+		let filterVg = [...state.videogames];
+		if (filterGenre && filterGenre !== "allGenres") {
+			filterVg = filterVg.filter((game) => {
+				const extractGenre = game.genres.map((genre) => {
+					return genre.name;
+				});
+				return extractGenre.includes(filterGenre);
+			});
+		}
+
+		if (filterOrigin === "DB")
+			filterVg = filterVg.filter((game) => isNaN(game.id));
+		if (filterOrigin === "API")
+			filterVg = filterVg.filter((game) => !isNaN(game.id));
+
+		return filterVg;
+	};
 	switch (type) {
 		//*VIDEOGAMES
 		case GETALLVG:
@@ -44,7 +64,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
 		case GETVGNAME:
 			return {
 				...state,
-				videogames: [...payload.data.db, ...payload.data.api],
+				filteredVideogames: [...payload.data.db, ...payload.data.api],
+				totalVideogames: state.filteredVideogames.length,
+				actualPage: 1,
 			};
 		case GETVGID:
 			return {
@@ -54,7 +76,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
 		case POSTVG:
 			return {
 				...state,
-				videogames: [payload.data, ...state.videogames],
+				videogames: [payload, ...state.videogames],
+				filteredVideogames: [payload, ...state.filteredVideogames],
 				totalVideogames: state.totalVideogames + 1,
 			};
 		//*GENRES
@@ -93,35 +116,27 @@ const rootReducer = (state = initialState, { type, payload }) => {
 						: Math.ceil(state.totalVideogames / state.gamesByPage),
 			};
 		//*FILTER & ORDER
-		case FILTERGENRES:
-			let backupGenre = [...state.Videogames];
-			if (payload !== "allGenres") {
-				backupGenre = backupGenre.filter((game) => {
-					const GenresDB = game.genres.map((genre) => genre.name.toUpperCase());
-					return GenresDB.includes(payload);
-				});
-			}
+		case FILTERGENRES: {
+			let filterVg = combinatedFilters(payload, state.filterGames);
 			return {
 				...state,
-				filteredVideogames: backupGenre,
+				filteredVideogames: filterVg,
+				totalVideogames: filterVg.length,
+				actualPage: 1,
+				filterGenres: payload,
 			};
+		}
 		case FILTERORIGIN:
-			let backupOrigin = [...state.Videogames];
-			if (payload === "ALL") backupOrigin = state.videogames;
-			if (payload === "API")
-				backupOrigin = state.videogames.filter((game) => {
-					return typeof game.id === "number";
-				});
-			if (payload === "DB")
-				backupOrigin = state.videogames.filter((game) => {
-					return typeof game.id !== "number";
-				});
+			let filterVg = combinatedFilters(state.filterGenres, payload);
 			return {
 				...state,
-				filteredVideogames: backupOrigin,
+				filteredVideogames: filterVg,
+				totalVideogames: filterVg.length,
+				actualPage: 1,
+				filterGames: payload,
 			};
 		case ORDERABC:
-			let ordererAbc = [...state.videogames];
+			let ordererAbc = [...state.filteredVideogames];
 			ordererAbc.sort((a, b) => {
 				if (a.name < b.name) return payload === "A-Z" ? -1 : 1;
 				if (a.name > b.name) return payload === "Z-A" ? -1 : 1;
@@ -134,7 +149,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				actualPage: 1,
 			};
 		case ORDERRATING:
-			let ordererRating = [...state.videogames];
+			let ordererRating = [...state.filteredVideogames];
 			ordererRating.sort((a, b) => {
 				if (payload === "0-9") return a.metacritic - b.metacritic;
 				if (payload === "9-0") return b.metacritic - a.metacritic;
@@ -149,6 +164,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
 			return {
 				...state,
 				filteredVideogames: state.videogames,
+				totalVideogames: state.videogames.length,
+				actualPage: 1,
+				filterGenres: false,
+				filterGames: false,
 			};
 		default:
 			return state;

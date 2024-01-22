@@ -53,7 +53,7 @@ const Create = () => {
 			<input
 				type="text"
 				name="name"
-				placeholder="The-Witcher-3:-Wild-Hunt"
+				placeholder="The Witcher 3: Wild Hunt"
 				onBlur={handleBlur}
 				onChange={handleChange}
 				value={gameData.name}

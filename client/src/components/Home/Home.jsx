@@ -35,14 +35,14 @@ const Home = () => {
 			<Filters />
 			{videogames
 				.map((game) => {
+					const fidexName = game.name.replaceAll("-", " ");
 					return (
 						<Videogame
 							key={game.id}
 							id={game.id}
-							name={game.name}
+							name={fidexName}
 							image={game.background_image}
 							genres={game.genres}
-							released={game.released}
 							rating={game.metacritic}
 						/>
 					);

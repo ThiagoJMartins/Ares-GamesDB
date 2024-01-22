@@ -1,0 +1,68 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
+.nav {
+    background-color: $primary-color;
+    min-height: 50px;
+    padding: 0px 14px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    @include sm {
+        flex-direction: column;
+        padding: 8px 0px;
+    }
+
+    .image {
+        display: flex;
+        padding-bottom: 10px;
+        padding-top: 5px;
+        width: 75px;
+    }
+}
+
+.image:hover {
+    transform: scale(1.1);
+    transition-duration: 0.5s;
+}
+
+.image:not(:hover) {
+    transform: scale(1);
+    transition-duration: 0.5s;
+}
+
+.links {
+
+    @include sm {
+        width: 100%;
+    }
+}
+
+.ul {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+    justify-content: center;
+}
+
+.li {
+    flex: 1;
+    display: flex;
+    padding: 10px;
+
+    &:hover {
+        color: yellowgreen;
+        transform: scale(1.2);
+        transition-duration: 0.5s;
+    }
+
+    &:not(:hover) {
+        color: white;
+        transform: scale(1);
+        transition-duration: 0.5s;
+    }
+}

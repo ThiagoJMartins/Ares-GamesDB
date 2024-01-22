@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { resetSearch, searchVideogame } from "../../redux/actions.js";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { getVideogameByName } from "../../redux/actions.js";
 //!----------------------------------------------------+/
 import style from "./SearchBar.module.scss";
 //!----------------------------------------------------+/
@@ -9,46 +8,36 @@ import style from "./SearchBar.module.scss";
 const SearchBar = () => {
 	const [search, setSearch] = useState("");
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
-	const vgFound = useSelector((state) => state.vgFound);
-	const findVg = useSelector((state) => state.findVg);
 
-	useEffect(() => {
-		if (findVg) {
-			dispatch(resetSearch());
-			navigate(`/detail/${vgFound.id}`);
-		}
-	}, [vgFound]);
+	const handleChange = (event) => {
+		setSearch(event.target.value);
+	};
 
-	const onSubmit = (e) => {
-		e.preventDefault();
-		if (search.length > 0) {
-			dispatch(searchVideogame(search.toLocaleLowerCase()));
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		if (search.length !== 0) {
+			dispatch(getVideogameByName(search.toLowerCase()));
 			setSearch("");
 		}
 	};
 
-	const onChange = (e) => {
-		e.preventDefault();
-		setSearch(e.target.value);
-	};
-
 	return (
-		<div>
-			<div>
-				<div>
-					<form onSubmit={onSubmit}>
-						<input
-							type="text"
-							value={search}
-							onChange={onChange}
-							placeholder="Find your videogame"
-						/>
-					</form>
-					<button type="submit">🔎</button>
-				</div>
-			</div>
-		</div>
+		<form className={style.searchbar}>
+			<input
+				type="text"
+				name="search"
+				value={search}
+				onChange={handleChange}
+				placeholder="The Witcher 3"
+			/>
+			<button
+				className={style.searchbutton}
+				type="submit"
+				value="Submit"
+				onClick={handleSubmit}>
+				🔎
+			</button>
+		</form>
 	);
 };
 

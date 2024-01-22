@@ -65,10 +65,13 @@ export function getVideogameById(id) {
 	};
 }
 
-export function postVideogame() {
+export function postVideogame(newVg) {
 	return async (dispatch) => {
 		try {
-			const { data } = await axios.post("http://localhost:3001/videogames");
+			const { data } = await axios.post(
+				"http://localhost:3001/videogames",
+				newVg
+			);
 
 			return dispatch({
 				type: POSTVG,
