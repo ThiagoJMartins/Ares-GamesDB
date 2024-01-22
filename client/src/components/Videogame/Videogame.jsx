@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import style from "./Videogame.module.scss";
 
 const Videogame = ({ id, name, image, genres, released, rating }) => {
@@ -11,7 +12,11 @@ const Videogame = ({ id, name, image, genres, released, rating }) => {
 					<span></span>
 				)}
 			</div>
-			{image && <img src={image} alt={name} width="256px" height="144px" />}
+			{image && (
+				<Link to={`/videogame/${id}`}>
+					<img src={image} alt={name} width="256px" height="144px" />
+				</Link>
+			)}
 			<div className={style.genres}>
 				{genres &&
 					genres.map((genre) => {
