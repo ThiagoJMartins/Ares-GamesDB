@@ -26,10 +26,10 @@ const Orders = () => {
 				Z-A
 			</button>
 			<button value="0-9" onClick={handleOrderRating}>
-				0-9
+				0-99
 			</button>
 			<button value="9-0" onClick={handleOrderRating}>
-				9-0
+				99-0
 			</button>
 		</div>
 	);

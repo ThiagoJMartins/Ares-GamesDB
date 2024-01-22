@@ -1,11 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
-import { postVideogame } from "../../redux/actions";
-import { useState } from "react";
+import { getGenres, getVideogames, postVideogame } from "../../redux/actions";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Create = () => {
 	const genres = useSelector((state) => state.genres);
 	const platforms = useSelector((state) => state.platforms);
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(getGenres());
+		dispatch(getVideogames());
+	}, []);
 
 	const [gameData, setGameData] = useState({
 		name: "",
@@ -95,7 +101,8 @@ const Create = () => {
 				value={gameData.metacritic}
 			/>
 			<label htmlFor="platforms">Platforms</label>
-			<select name="platforms" onChange={handleBlur}>
+			<select id="platsSelect" name="platforms" onChange={handleBlur}>
+				<option value="0">Select Platforms</option>
 				{platforms.map((platform, index) => {
 					return (
 						<option key={index} value={platform}>
@@ -105,7 +112,8 @@ const Create = () => {
 				})}
 			</select>
 			<label htmlFor="genres">Genres</label>
-			<select name="genres" onChange={handleChange}>
+			<select id="genresSelect" name="genres" onChange={handleBlur}>
+				<option value="0">Select Genres</option>
 				{genres.map((genre) => {
 					return (
 						<option key={genre.id} value={genre.name}>
@@ -114,7 +122,11 @@ const Create = () => {
 					);
 				})}
 			</select>
-			<input type="submit" value="Create" onClick={handleSubmit} />
+			<Link to="/home">
+				<button type="submit" value="Create" onClick={handleSubmit}>
+					Create
+				</button>
+			</Link>
 		</form>
 	);
 };

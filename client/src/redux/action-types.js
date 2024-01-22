@@ -3,7 +3,8 @@ export const GETVGNAME = "GETVGNAME";
 export const GETVGID = "GETVGID";
 export const GETALLVG = "GETALLVG";
 export const POSTVG = "POSTVG";
-
+export const GETVGDETAIL = "GETVGDETAIL";
+export const RESETVG = "RESETVG";
 //*GENRES
 export const GETGENRES = "GETGENRES";
 

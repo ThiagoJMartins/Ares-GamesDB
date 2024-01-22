@@ -2,8 +2,9 @@ import axios from "axios";
 import {
 	GETALLVG,
 	GETVGNAME,
-	GETVGID,
 	POSTVG,
+	GETVGDETAIL,
+	RESETVG,
 	GETGENRES,
 	ADVANCEPAGE,
 	MINPAGE,
@@ -56,7 +57,7 @@ export function getVideogameById(id) {
 			);
 
 			return dispatch({
-				type: GETVGID,
+				type: GETVGDETAIL,
 				payload: data,
 			});
 		} catch (error) {
@@ -80,6 +81,13 @@ export function postVideogame(newVg) {
 		} catch (error) {
 			console.log(error);
 		}
+	};
+}
+
+export function resetVideogame() {
+	return {
+		type: RESETVG,
+		payload: false,
 	};
 }
 

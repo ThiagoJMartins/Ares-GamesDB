@@ -3,6 +3,8 @@ import {
 	GETVGNAME,
 	GETVGID,
 	POSTVG,
+	GETVGDETAIL,
+	RESETVG,
 	GETGENRES,
 	ADVANCEPAGE,
 	MINPAGE,
@@ -18,6 +20,8 @@ const initialState = {
 	videogames: [],
 	genres: [],
 	platforms: [],
+	vgDetail: {},
+	searching: false,
 	//*PAGINATION
 	actualPage: 1,
 	totalVideogames: 0,
@@ -79,6 +83,19 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				videogames: [payload, ...state.videogames],
 				filteredVideogames: [payload, ...state.filteredVideogames],
 				totalVideogames: state.totalVideogames + 1,
+			};
+		case GETVGDETAIL:
+			console.log(payload);
+			return {
+				...state,
+				vgDetail: payload,
+				searching: true,
+			};
+		case RESETVG:
+			return {
+				...state,
+				vgDetail: {},
+				searching: false,
 			};
 		//*GENRES
 		case GETGENRES:
