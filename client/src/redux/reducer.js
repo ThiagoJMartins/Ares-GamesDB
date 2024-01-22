@@ -17,6 +17,7 @@ import {
 const initialState = {
 	videogames: [],
 	genres: [],
+	platforms: [],
 	//*PAGINATION
 	actualPage: 1,
 	totalVideogames: 0,
@@ -29,11 +30,16 @@ const rootReducer = (state = initialState, { type, payload }) => {
 	switch (type) {
 		//*VIDEOGAMES
 		case GETALLVG:
+			const allVg = [...payload.data.db, ...payload.data.api];
+			const platformsVg = allVg.map((game) => game.platforms);
+			const flatPlats = platformsVg.flat();
+			const allPlats = [...new Set(flatPlats)];
 			return {
 				...state,
-				videogames: [...payload.data.db, ...payload.data.api],
-				filteredVideogames: [...payload.data.db, ...payload.data.api],
-				totalVideogames: payload.data.db.length + payload.data.api.length,
+				videogames: allVg,
+				filteredVideogames: allVg,
+				totalVideogames: allVg.length,
+				platforms: allPlats,
 			};
 		case GETVGNAME:
 			return {
@@ -48,7 +54,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
 		case POSTVG:
 			return {
 				...state,
-				videogames: payload,
+				videogames: [payload.data, ...state.videogames],
+				totalVideogames: state.totalVideogames + 1,
 			};
 		//*GENRES
 		case GETGENRES:
@@ -86,8 +93,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
 						: Math.ceil(state.totalVideogames / state.gamesByPage),
 			};
 		//*FILTER & ORDER
-		case FILTERGENRES: {
-			let backupGenre = [...state.videogames];
+		case FILTERGENRES:
+			let backupGenre = [...state.Videogames];
 			if (payload !== "allGenres") {
 				backupGenre = backupGenre.filter((game) => {
 					const GenresDB = game.genres.map((genre) => genre.name.toUpperCase());
@@ -98,9 +105,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				...state,
 				filteredVideogames: backupGenre,
 			};
-		}
 		case FILTERORIGIN:
-			let backupOrigin = [...state.videogames];
+			let backupOrigin = [...state.Videogames];
 			if (payload === "ALL") backupOrigin = state.videogames;
 			if (payload === "API")
 				backupOrigin = state.videogames.filter((game) => {
@@ -115,24 +121,29 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				filteredVideogames: backupOrigin,
 			};
 		case ORDERABC:
-			let filteredAbc = [...state.videogames];
-			filteredAbc.sort((a, b) => {
+			let ordererAbc = [...state.videogames];
+			ordererAbc.sort((a, b) => {
 				if (a.name < b.name) return payload === "A-Z" ? -1 : 1;
 				if (a.name > b.name) return payload === "Z-A" ? -1 : 1;
+				return 0;
 			});
 			return {
 				...state,
-				filteredVideogames: filteredAbc,
+				filteredVideogames: ordererAbc,
+				totalVideogames: ordererAbc.length,
+				actualPage: 1,
 			};
 		case ORDERRATING:
-			let filteredRating = [...state.videogames];
-			filteredRating.sort((a, b) => {
+			let ordererRating = [...state.videogames];
+			ordererRating.sort((a, b) => {
 				if (payload === "0-9") return a.metacritic - b.metacritic;
 				if (payload === "9-0") return b.metacritic - a.metacritic;
 			});
 			return {
 				...state,
-				filteredVideogames: filteredRating,
+				filteredVideogames: ordererRating,
+				totalVideogames: ordererRating.length,
+				actualPage: 1,
 			};
 		case RESET:
 			return {

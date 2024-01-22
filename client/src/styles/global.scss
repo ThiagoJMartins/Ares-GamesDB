@@ -1,4 +1,14 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+html,
 body {
+    min-height: 100vh;
     margin: 0;
     font-family: "Bebas Neue", sans-serif;
 
