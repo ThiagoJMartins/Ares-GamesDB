@@ -20,7 +20,6 @@ const Detail = () => {
 		<div>
 			{detail.name ? (
 				<Videogame
-					key={detail.id}
 					id={detail.id}
 					name={detail.name}
 					image={detail.background_image}

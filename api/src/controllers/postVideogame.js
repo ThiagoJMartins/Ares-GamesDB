@@ -10,7 +10,7 @@ const postVideogame = async (req, res) => {
 		released,
 		metacritic,
 	} = req.body;
-	await CreateInDB(
+	const data = await CreateInDB(
 		name,
 		background_image,
 		description,
@@ -19,7 +19,7 @@ const postVideogame = async (req, res) => {
 		released,
 		metacritic
 	);
-	return res.status(201).json("Videogame successfully created");
+	return res.status(201).json(data);
 };
 
 module.exports = postVideogame;

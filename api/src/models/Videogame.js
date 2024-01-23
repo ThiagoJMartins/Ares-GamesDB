@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
 			allowNull: false,
 			validate: {
 				notEmpty: true,
-				len: [2, 40],
+				len: [2, 30],
 			},
 		},
 		description: {
@@ -24,7 +24,7 @@ module.exports = (sequelize) => {
 			allowNull: false,
 			validate: {
 				notEmpty: true,
-				len: [10, 256],
+				len: [10, 250],
 			},
 		},
 		platforms: {
@@ -32,7 +32,7 @@ module.exports = (sequelize) => {
 			allowNull: false,
 			validate: {
 				notEmpty: true,
-				len: [2, 40],
+				len: [2, 30],
 			},
 		},
 		background_image: {
@@ -54,7 +54,7 @@ module.exports = (sequelize) => {
 			allowNull: false,
 			validate: {
 				min: 0,
-				max: 100,
+				max: 99,
 			},
 		},
 	});

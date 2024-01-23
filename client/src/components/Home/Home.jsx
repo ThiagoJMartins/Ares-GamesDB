@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { getVideogames, getGenres } from "../../redux/actions";
 import style from "./Home.module.scss";
 import Videogame from "../Videogame/Videogame";
@@ -8,45 +8,48 @@ import Orders from "../Orders/Orders";
 import Filters from "../Filters/Filters";
 
 const Home = () => {
-	const videogames = useSelector((state) => state.filteredVideogames);
-	const genres = useSelector((state) => state.genres);
 	const dispatch = useDispatch();
+	const videogames = useSelector((state) => state.filteredVideogames);
 	const actualPage = useSelector((state) => state.actualPage);
 	const totalVideogames = useSelector((state) => state.totalVideogames);
 	const gamesByPage = useSelector((state) => state.gamesByPage);
 
-	let start = (actualPage - 1) * gamesByPage;
-	let end = start + gamesByPage;
-	if (end > totalVideogames) end = totalVideogames;
-	if (start < 0) start = 0;
+	const start = Math.max((actualPage - 1) * gamesByPage, 0);
+	const end = Math.min(start + gamesByPage, totalVideogames);
 
 	useEffect(() => {
+		loadInitialData();
+	}, [dispatch, videogames]);
+
+	const loadInitialData = () => {
 		if (videogames.length === 0) {
 			dispatch(getVideogames());
-		}
-		if (genres.length === 0) {
 			dispatch(getGenres());
 		}
-	}, []);
+	};
+
+	const renderVideogames = () => {
+		return videogames
+			.slice(start, end)
+			.map((game, index) => (
+				<Videogame
+					key={index}
+					id={game.id}
+					name={game.name}
+					image={game.background_image}
+					genres={game.genres}
+					rating={game.metacritic}
+				/>
+			));
+	};
 
 	return (
 		<div className={style.home}>
-			<Orders />
-			<Filters />
-			{videogames
-				.map((game) => {
-					return (
-						<Videogame
-							key={game.id}
-							id={game.id}
-							name={game.name}
-							image={game.background_image}
-							genres={game.genres}
-							rating={game.metacritic}
-						/>
-					);
-				})
-				.slice(start, end)}
+			<div className={style.filterBar}>
+				<Orders />
+				<Filters />
+			</div>
+			{renderVideogames()}
 			<div>
 				<Pagination />
 			</div>

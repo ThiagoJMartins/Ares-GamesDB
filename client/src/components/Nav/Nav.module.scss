@@ -53,6 +53,7 @@
     flex: 1;
     display: flex;
     padding: 10px;
+    color: white;
 
     &:hover {
         color: yellowgreen;
@@ -61,8 +62,12 @@
     }
 
     &:not(:hover) {
-        color: white;
         transform: scale(1);
         transition-duration: 0.5s;
     }
+}
+
+.activeLink {
+    color: yellowgreen;
+    font-weight: bold;
 }

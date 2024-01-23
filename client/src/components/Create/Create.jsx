@@ -2,18 +2,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { getGenres, getVideogames, postVideogame } from "../../redux/actions";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import validate from "../../utils/validate.js";
+import InputField from "./InputField.jsx";
+import SelectField from "./SelectField.jsx";
 
 const Create = () => {
 	const genres = useSelector((state) => state.genres);
 	const platforms = useSelector((state) => state.platforms);
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(getGenres());
-		dispatch(getVideogames());
-	}, []);
-
-	const [gameData, setGameData] = useState({
+	const initialValues = {
 		name: "",
 		background_image: "",
 		description: "",
@@ -21,7 +19,16 @@ const Create = () => {
 		metacritic: "",
 		platforms: [],
 		genres: [],
-	});
+	};
+
+	const [gameData, setGameData] = useState(initialValues);
+	const [errors, setErrors] = useState({});
+	const [hasErrors, setHasErrors] = useState(false);
+
+	useEffect(() => {
+		dispatch(getGenres());
+		dispatch(getVideogames());
+	}, [dispatch]);
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
@@ -41,89 +48,128 @@ const Create = () => {
 				[name]: value,
 			});
 		}
+		const fieldErrors = validate(gameData, name, value);
+		setErrors({
+			...errors,
+			[name]: fieldErrors[name],
+		});
+
+		setHasErrors(
+			Object.values({ ...errors, [name]: fieldErrors[name] }).some(
+				(fieldErrors) => !!fieldErrors
+			)
+		);
+	};
+
+	const handleSubmit = () => {
+		const formErrors = validate(gameData);
+		setErrors(formErrors);
+
+		if (Object.values(formErrors).every((fieldErrors) => !fieldErrors)) {
+			dispatch(postVideogame(gameData));
+			alert("Videogame successfully created");
+		}
 	};
 
 	const handleBlur = (event) => {
-		handleChange(event);
+		const { name, value } = event.target;
+		const fieldErrors = validate(gameData, name, value);
+		setErrors({
+			...errors,
+			[name]: fieldErrors[name],
+		});
+
+		setHasErrors(
+			Object.values({ ...errors, [name]: fieldErrors[name] }).some(
+				(fieldErrors) => !!fieldErrors
+			)
+		);
 	};
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
-		dispatch(postVideogame(gameData));
-		alert("Videogame successfully created");
+	const handlePlatformChange = (event) => {
+		const { value } = event.target;
+		setGameData({ ...gameData, platforms: [value] });
+		handleBlur(event);
+	};
+
+	const handleGenreChange = (event) => {
+		const { value } = event.target;
+		setGameData({ ...gameData, genres: [value] });
+		handleBlur(event);
 	};
 
 	return (
 		<form method="post">
-			<label htmlFor="name">Name</label>
-			<input
-				type="text"
+			<InputField
+				label="Name"
 				name="name"
-				placeholder="The Witcher 3: Wild Hunt"
-				onBlur={handleBlur}
+				type="text"
+				placeholder="The-Witcher-3:-Wild-Hunt"
+				onBlur={handleChange}
 				onChange={handleChange}
 				value={gameData.name}
+				error={errors.name}
 			/>
-			<label htmlFor="image">Image</label>
-			<input
-				type="text"
+			<InputField
+				label="Image"
 				name="background_image"
+				type="text"
 				placeholder="https://example-image.com"
-				onBlur={handleBlur}
+				onBlur={handleChange}
 				onChange={handleChange}
 				value={gameData.background_image}
+				error={errors.background_image}
 			/>
-			<label htmlFor="description">Description</label>
-			<input
-				type="text"
+			<InputField
+				label="Description"
 				name="description"
+				type="text"
 				placeholder="The third game in a series, it holds nothing back..."
-				onBlur={handleBlur}
+				onBlur={handleChange}
 				onChange={handleChange}
 				value={gameData.description}
+				error={errors.description}
 			/>
-			<label htmlFor="released_date">Released date</label>
-			<input
-				type="text"
+			<InputField
+				label="Released Date"
 				name="released"
+				type="text"
 				placeholder="2015-05-18"
-				onBlur={handleBlur}
+				onBlur={handleChange}
 				onChange={handleChange}
 				value={gameData.released}
+				error={errors.released}
 			/>
-			<label htmlFor="rating">Rating</label>
-			<input
-				type="text"
+			<InputField
+				label="Rating"
 				name="metacritic"
-				placeholder="0-99"
-				onBlur={handleBlur}
+				type="number"
+				placeholder="0 - 99"
+				onBlur={handleChange}
 				onChange={handleChange}
 				value={gameData.metacritic}
+				error={errors.metacritic}
 			/>
-			<label htmlFor="platforms">Platforms</label>
-			<select id="platsSelect" name="platforms" onChange={handleBlur}>
-				<option value="0">Select Platforms</option>
-				{platforms.map((platform, index) => {
-					return (
-						<option key={index} value={platform}>
-							{platform}
-						</option>
-					);
-				})}
-			</select>
-			<label htmlFor="genres">Genres</label>
-			<select id="genresSelect" name="genres" onChange={handleBlur}>
-				<option value="0">Select Genres</option>
-				{genres.map((genre) => {
-					return (
-						<option key={genre.id} value={genre.name}>
-							{genre.name}
-						</option>
-					);
-				})}
-			</select>
+			<SelectField
+				label="Platforms"
+				name="platforms"
+				options={platforms}
+				value={gameData.platforms[0] || "0"}
+				onChange={handlePlatformChange}
+				onBlur={handleBlur}
+				error={errors.platforms}
+			/>
+			<SelectField
+				label="Genres"
+				name="genres"
+				options={genres}
+				value={gameData.genres[0] || "0"}
+				onChange={handleGenreChange}
+				onBlur={handleBlur}
+				error={errors.genres}
+			/>
 			<Link to="/home">
-				<button type="submit" value="Create" onClick={handleSubmit}>
+				<button type="submit" onClick={handleSubmit} disabled={hasErrors}>
 					Create
 				</button>
 			</Link>

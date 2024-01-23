@@ -14,7 +14,7 @@ const Videogame = ({
 	return (
 		<div className={style.container}>
 			<div className={style.header}>
-				<span className={style.name}>{name}</span>
+				<span className={style.name}>{name?.replaceAll("-", " ")}</span>
 				{typeof id === "number" ? (
 					<span className={style.id}>#{id}</span>
 				) : (
@@ -29,10 +29,12 @@ const Videogame = ({
 			<div className={style.plats}>
 				{platforms &&
 					platforms.map((platform, index) => {
-						return <span key={index}>{platform}</span>;
+						return <span key={index}>{platform} </span>;
 					})}
 			</div>
-			<div className={style.description}>{description}</div>
+			<div className={style.description}>
+				<div dangerouslySetInnerHTML={{ __html: description }} />
+			</div>
 			<div className={style.released}>{released}</div>
 			<div className={style.rating}>{rating}</div>
 			<div className={style.genres}>

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 //!----------------------------------------------------+/
 import logo from "/logo.svg";
@@ -15,19 +15,28 @@ const Nav = () => {
 			<div className={style.links}>
 				<ul className={style.ul}>
 					<li>
-						<Link to="/create" className={style.li}>
+						<NavLink
+							to="/create"
+							className={style.li}
+							activeClassName={style.activeLink}>
 							Create
-						</Link>
+						</NavLink>
 					</li>
 					<li>
-						<Link to="/about" className={style.li}>
+						<NavLink
+							to="/about"
+							className={style.li}
+							activeClassName={style.activeLink}>
 							About
-						</Link>
+						</NavLink>
 					</li>
 					<li>
-						<Link to="/home" className={style.li}>
+						<NavLink
+							to="/home"
+							className={style.li}
+							activeClassName={style.activeLink}>
 							Home
-						</Link>
+						</NavLink>
 					</li>
 				</ul>
 			</div>

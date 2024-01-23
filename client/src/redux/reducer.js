@@ -20,6 +20,7 @@ const initialState = {
 	videogames: [],
 	genres: [],
 	platforms: [],
+	backupVg: [],
 	vgDetail: {},
 	searching: false,
 	//*PAGINATION
@@ -64,10 +65,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				filteredVideogames: allVg,
 				totalVideogames: allVg.length,
 				platforms: allPlats,
+				backupVg: allVg,
 			};
 		case GETVGNAME:
 			return {
 				...state,
+				videogames: [...payload.data.db, ...payload.data.api],
 				filteredVideogames: [...payload.data.db, ...payload.data.api],
 				totalVideogames: state.filteredVideogames.length,
 				actualPage: 1,
@@ -81,11 +84,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
 			return {
 				...state,
 				videogames: [payload, ...state.videogames],
-				filteredVideogames: [payload, ...state.filteredVideogames],
+				filteredVideogames: [payload, ...state.videogames],
 				totalVideogames: state.totalVideogames + 1,
 			};
 		case GETVGDETAIL:
-			console.log(payload);
 			return {
 				...state,
 				vgDetail: payload,
@@ -180,7 +182,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
 		case RESET:
 			return {
 				...state,
-				filteredVideogames: state.videogames,
+				videogames: state.backupVg,
+				filteredVideogames: state.backupVg,
 				totalVideogames: state.videogames.length,
 				actualPage: 1,
 				filterGenres: false,

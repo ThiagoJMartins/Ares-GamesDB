@@ -14,7 +14,7 @@ const searchApiById = async (id) => {
 				name: vg.data.name,
 				background_image: vg.data.background_image,
 				description: vg.data.description,
-				genres: vg.data.genres.map((genre) => genre.name),
+				genres: vg.data.genres,
 				platforms: vg.data.platforms.map((plat) => plat.platform.name),
 				released: vg.data.released,
 				metacritic: vg.data.metacritic,

@@ -35,10 +35,11 @@ export function getVideogames() {
 export function getVideogameByName(name) {
 	return async (dispatch) => {
 		try {
+			const fixedName = name.replaceAll(" ", "-");
 			const { data } = await axios.get(
-				`http://localhost:3001/videogames?name=${name}`
+				`http://localhost:3001/videogames?name=${fixedName}`
 			);
-
+			console.log(data);
 			return dispatch({
 				type: GETVGNAME,
 				payload: data,
@@ -73,7 +74,7 @@ export function postVideogame(newVg) {
 				"http://localhost:3001/videogames",
 				newVg
 			);
-
+			console.log(data);
 			return dispatch({
 				type: POSTVG,
 				payload: data,

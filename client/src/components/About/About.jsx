@@ -1,3 +1,5 @@
+import React from "react";
+
 const About = () => {
 	return (
 		<div>
@@ -17,21 +19,22 @@ const About = () => {
 						Sequelize - PostgreSQL
 					</p>
 					<div>
-						<p>
-							What to do in the application:
-							<br />
-							- Search videogames by name.
-							<br />- Filter videogames by:
-							<p>
-								- Platform
-								<br />
-								- Rating
-								<br />- Genre
-							</p>
-							<br />
-							- Sort ascending or descending
-							<br />
-						</p>
+						<div>
+							<p>What to do in the application:</p>
+							<ul>
+								<li>Search videogames by name.</li>
+								<li>Filter videogames by:</li>
+								<ul>
+									<li>Platform</li>
+									<li>Genre</li>
+								</ul>
+								<li>Sort videogames by:</li>
+								<ul>
+									<li>Alphabetic</li>
+									<li>Rating</li>
+								</ul>
+							</ul>
+						</div>
 					</div>
 				</div>
 				<div>
