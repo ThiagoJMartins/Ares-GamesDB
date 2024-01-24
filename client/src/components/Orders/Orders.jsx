@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { orderAbc, orderRating, reset } from "../../redux/actions";
+import style from "./Orders.module.scss";
 
 const Orders = () => {
 	const dispatch = useDispatch();
@@ -17,19 +18,21 @@ const Orders = () => {
 	};
 
 	return (
-		<div>
-			<button onClick={handleReset}>Reset</button>
+		<div className={style.buttonContainer}>
+			<button onClick={handleReset}>
+				<span>Reset</span>
+			</button>
 			<button value="A-Z" onClick={handleOrderAbc}>
-				A-Z
+				<span>A-Z</span>{" "}
 			</button>
 			<button value="Z-A" onClick={handleOrderAbc}>
-				Z-A
+				<span>Z-A</span>{" "}
 			</button>
 			<button value="0-9" onClick={handleOrderRating}>
-				0-99
+				<span>0-99</span>
 			</button>
 			<button value="9-0" onClick={handleOrderRating}>
-				99-0
+				<span>99-0</span>
 			</button>
 		</div>
 	);

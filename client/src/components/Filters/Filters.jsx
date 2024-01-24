@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { filterGenres, filterOrigin } from "../../redux/actions";
+import style from "./Filters.module.scss";
 
 const Filters = () => {
 	const selectGenre = useSelector((state) => state.filterGenres);
@@ -16,8 +17,11 @@ const Filters = () => {
 	};
 
 	return (
-		<div>
-			<select onChange={handleFilterGenres} value={selectGenre}>
+		<div className={style.filterContainer}>
+			<select
+				className={style.selectFilter}
+				onChange={handleFilterGenres}
+				value={selectGenre}>
 				<option value={"allGenres"}>All Genres</option>
 				{genres.map((genre) => (
 					<option key={genre.id} value={genre.name}>
@@ -25,7 +29,11 @@ const Filters = () => {
 					</option>
 				))}
 			</select>
-			<select onChange={handleFilterOrigin} value={selectOrigin}>
+			<div></div>
+			<select
+				className={style.selectFilter}
+				onChange={handleFilterOrigin}
+				value={selectOrigin}>
 				<option value="ALL">All</option>
 				<option value="API">Api</option>
 				<option value="DB">DataBase</option>

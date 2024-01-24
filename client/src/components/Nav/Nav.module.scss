@@ -2,8 +2,9 @@
 @import "../../styles/mixins.scss";
 
 .nav {
-    background-color: $primary-color;
+    background-color: rgba(0, 0, 0, 0.315);
     min-height: 50px;
+    max-width: 100%;
     padding: 0px 14px;
     display: flex;
     flex-direction: row;
@@ -19,7 +20,7 @@
         display: flex;
         padding-bottom: 10px;
         padding-top: 5px;
-        width: 75px;
+        width: 55px;
     }
 }
 

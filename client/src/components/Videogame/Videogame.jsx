@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import style from "./Videogame.module.scss";
 
 const Videogame = ({
@@ -11,8 +11,10 @@ const Videogame = ({
 	released,
 	rating,
 }) => {
+	const isParam = useParams();
+
 	return (
-		<div className={style.container}>
+		<div className={isParam.id ? style.containerDetail : style.container}>
 			<div className={style.header}>
 				<span className={style.name}>{name?.replaceAll("-", " ")}</span>
 				{typeof id === "number" ? (
@@ -23,24 +25,44 @@ const Videogame = ({
 			</div>
 			{image && (
 				<Link to={`/videogame/${id}`}>
-					<img src={image} alt={name} width="256px" height="144px" />
+					<img
+						className={style.image}
+						src={image}
+						alt={name}
+						width="256px"
+						height="144px"
+					/>
 				</Link>
 			)}
 			<div className={style.plats}>
 				{platforms &&
 					platforms.map((platform, index) => {
-						return <span key={index}>{platform} </span>;
+						return (
+							<span className={style.plat} key={index}>
+								{platform}{" "}
+							</span>
+						);
 					})}
 			</div>
-			<div className={style.description}>
-				<div dangerouslySetInnerHTML={{ __html: description }} />
+			<div className={style.descriptionContainer}>
+				<div
+					className={style.description}
+					dangerouslySetInnerHTML={{ __html: description }}
+				/>
 			</div>
-			<div className={style.released}>{released}</div>
-			<div className={style.rating}>{rating}</div>
+			<div className={style.numberContainer}>
+				<div className={style.released}>{released}</div>
+				<div className={style.rating}>{rating > 0 ? rating : "??"}</div>
+			</div>
+
 			<div className={style.genres}>
 				{genres &&
 					genres.map((genre) => {
-						return <span key={genre.id}>{genre.name} </span>;
+						return (
+							<span className={style.genre} key={genre.id}>
+								{genre.name}{" "}
+							</span>
+						);
 					})}
 			</div>
 		</div>

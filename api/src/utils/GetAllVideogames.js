@@ -8,7 +8,7 @@ const GetAllVideogames = async () => {
 
 	while (videogames.length < 100) {
 		const { data } = await axios.get(
-			`https://api.rawg.io/api/games?key=${API_KEY}&page=${pageNum}&page_size=25`
+			`https://api.rawg.io/api/games?key=${API_KEY}&page=${pageNum}&page_size=15`
 		);
 
 		videogames = [...videogames, ...data.results];

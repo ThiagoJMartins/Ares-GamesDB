@@ -38,6 +38,7 @@ const Home = () => {
 					name={game.name}
 					image={game.background_image}
 					genres={game.genres}
+					released={game.released}
 					rating={game.metacritic}
 				/>
 			));
@@ -45,12 +46,16 @@ const Home = () => {
 
 	return (
 		<div className={style.home}>
-			<div className={style.filterBar}>
-				<Orders />
-				<Filters />
+			<div className={style.optionsBar}>
+				<div className={style.orderBar}>
+					<Orders />
+				</div>
+				<div className={style.filterBar}>
+					<Filters />
+				</div>
 			</div>
-			{renderVideogames()}
-			<div>
+			<div className={style.videogames}>{renderVideogames()}</div>
+			<div className={style.pagination}>
 				<Pagination />
 			</div>
 		</div>

@@ -79,7 +79,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				...state,
 				videogames: [...payload.data.db, ...payload.data.api],
 				filteredVideogames: [...payload.data.db, ...payload.data.api],
-				totalVideogames: state.filteredVideogames.length,
+				totalVideogames: [...payload.data.db, ...payload.data.api].length,
 				actualPage: 1,
 			};
 		case GETVGID:

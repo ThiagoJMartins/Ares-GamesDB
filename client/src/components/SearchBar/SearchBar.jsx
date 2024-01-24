@@ -28,15 +28,9 @@ const SearchBar = () => {
 				name="search"
 				value={search}
 				onChange={handleChange}
-				placeholder="The Witcher 3"
+				className={style.search}
+				placeholder="The Witcher 3: Wild Hunt"
 			/>
-			<button
-				className={style.searchbutton}
-				type="submit"
-				value="Submit"
-				onClick={handleSubmit}>
-				🔎
-			</button>
 		</form>
 	);
 };

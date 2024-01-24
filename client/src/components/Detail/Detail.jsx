@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getVideogameById, resetVideogame } from "../../redux/actions";
 import Videogame from "../Videogame/Videogame";
+import style from "./Detail.module.scss";
 
 const Detail = () => {
 	const detail = useSelector((state) => state.vgDetail);
@@ -17,7 +18,7 @@ const Detail = () => {
 	}, [id]);
 
 	return (
-		<div>
+		<div className={style.detailContainer}>
 			{detail.name ? (
 				<Videogame
 					id={detail.id}
@@ -30,7 +31,7 @@ const Detail = () => {
 					genres={detail.genres}
 				/>
 			) : (
-				<h1>Loading...</h1>
+				<div class="spinner"></div>
 			)}
 		</div>
 	);
