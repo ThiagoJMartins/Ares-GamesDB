@@ -52,6 +52,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
 
 		return filterVg;
 	};
+
+	const updateFilteredVideogames = (filteredVideogames) => ({
+		...state,
+		filteredVideogames,
+		totalVideogames: filteredVideogames.length,
+		actualPage: 1,
+	});
 	switch (type) {
 		//*VIDEOGAMES
 		case GETALLVG:
@@ -146,7 +153,18 @@ const rootReducer = (state = initialState, { type, payload }) => {
 			};
 		}
 		case FILTERORIGIN:
-			let filterVg = combinatedFilters(state.filterGenres, payload);
+			let filterVg;
+			if (payload === "allOrigins") {
+				filterVg = state.videogames.filter((game) =>
+					state.filterGenres
+						? game.genres
+								.map((genre) => genre.name)
+								.includes(state.filterGenres)
+						: true
+				);
+			} else {
+				filterVg = combinatedFilters(state.filterGenres, payload);
+			}
 			return {
 				...state,
 				filteredVideogames: filterVg,
@@ -155,30 +173,27 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				filterGames: payload,
 			};
 		case ORDERABC:
-			let ordererAbc = [...state.filteredVideogames];
-			ordererAbc.sort((a, b) => {
-				if (a.name < b.name) return payload === "A-Z" ? -1 : 1;
-				if (a.name > b.name) return payload === "Z-A" ? -1 : 1;
-				return 0;
-			});
-			return {
-				...state,
-				filteredVideogames: ordererAbc,
-				totalVideogames: ordererAbc.length,
-				actualPage: 1,
-			};
+			return updateFilteredVideogames(
+				[...state.filteredVideogames].sort((a, b) =>
+					a.name < b.name
+						? payload === "A-Z"
+							? -1
+							: 1
+						: a.name > b.name
+						? payload === "Z-A"
+							? -1
+							: 1
+						: 0
+				)
+			);
 		case ORDERRATING:
-			let ordererRating = [...state.filteredVideogames];
-			ordererRating.sort((a, b) => {
-				if (payload === "0-9") return a.metacritic - b.metacritic;
-				if (payload === "9-0") return b.metacritic - a.metacritic;
-			});
-			return {
-				...state,
-				filteredVideogames: ordererRating,
-				totalVideogames: ordererRating.length,
-				actualPage: 1,
-			};
+			return updateFilteredVideogames(
+				[...state.filteredVideogames].sort((a, b) =>
+					payload === "0-9"
+						? a.metacritic - b.metacritic
+						: b.metacritic - a.metacritic
+				)
+			);
 		case RESET:
 			return {
 				...state,
