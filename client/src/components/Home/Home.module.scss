@@ -7,13 +7,11 @@
 
 .videogames {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, .5fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     justify-items: center;
-    gap: 10px;
+    gap: 20px;
+    padding: 10px;
 
-    @include lg {
-        grid-template-columns: repeat(5, minmax(300px, .5fr));
-    }
 }
 
 .optionsBar {
