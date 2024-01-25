@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getVideogames, getGenres } from "../../redux/actions";
 import style from "./Home.module.scss";
@@ -29,19 +29,32 @@ const Home = () => {
 	};
 
 	const renderVideogames = () => {
-		return videogames
-			.slice(start, end)
-			.map((game, index) => (
-				<Videogame
-					key={index}
-					id={game.id}
-					name={game.name}
-					image={game.background_image}
-					genres={game.genres}
-					released={game.released}
-					rating={game.metacritic}
-				/>
-			));
+		{
+			return videogames.length !== 0 ? (
+				videogames
+					.slice(start, end)
+					.map((game, index) => (
+						<Videogame
+							key={index}
+							id={game.id}
+							name={game.name}
+							image={game.background_image}
+							genres={game.genres}
+							released={game.released}
+							rating={game.metacritic}
+						/>
+					))
+			) : (
+				<div className={style.sonic}>
+					<img
+						src="./sonic.gif"
+						alt="Sonic Loading"
+						width="300px"
+						height="300px"
+					/>
+				</div>
+			);
+		}
 	};
 
 	return (
@@ -54,7 +67,10 @@ const Home = () => {
 					<Filters />
 				</div>
 			</div>
-			<div className={style.videogames}>{renderVideogames()}</div>
+			<div
+				className={videogames.length !== 0 ? style.videogames : style.loading}>
+				{renderVideogames()}
+			</div>
 			<div className={style.pagination}>
 				<Pagination />
 			</div>

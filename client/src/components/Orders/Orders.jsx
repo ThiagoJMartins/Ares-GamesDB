@@ -19,20 +19,18 @@ const Orders = () => {
 
 	return (
 		<div className={style.buttonContainer}>
-			<button onClick={handleReset}>
-				<span>Reset</span>
-			</button>
+			<button onClick={handleReset}>Reset</button>
 			<button value="A-Z" onClick={handleOrderAbc}>
-				<span>A-Z</span>{" "}
+				A-Z
 			</button>
 			<button value="Z-A" onClick={handleOrderAbc}>
-				<span>Z-A</span>{" "}
+				Z-A
 			</button>
 			<button value="0-9" onClick={handleOrderRating}>
-				<span>0-99</span>
+				0-99
 			</button>
 			<button value="9-0" onClick={handleOrderRating}>
-				<span>99-0</span>
+				99-0
 			</button>
 		</div>
 	);

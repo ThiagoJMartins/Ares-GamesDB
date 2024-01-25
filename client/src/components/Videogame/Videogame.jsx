@@ -59,9 +59,9 @@ const Videogame = ({
 				{genres &&
 					genres.map((genre) => {
 						return (
-							<span className={style.genre} key={genre.id}>
+							<li className={style.genre} key={genre.id}>
 								{genre.name}{" "}
-							</span>
+							</li>
 						);
 					})}
 			</div>

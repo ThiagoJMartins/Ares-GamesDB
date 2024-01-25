@@ -1,7 +1,7 @@
 .selectFilter {
     padding: 3px 6px;
     margin: 0px 10px;
-    font-size: 12px;
+    font-size: .5rem;
     background-color: rgba(0, 0, 0, 0);
     color: rgb(255, 255, 255);
     cursor: pointer;
@@ -17,7 +17,7 @@
 }
 
 .selectFilter:hover {
-    box-shadow: 3px 6px 15px 10px rgba(24, 161, 17, 0.368);
+    box-shadow: 0 5px 5px purple;
     border: none;
     outline: none;
 }

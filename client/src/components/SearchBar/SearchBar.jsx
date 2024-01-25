@@ -29,7 +29,7 @@ const SearchBar = () => {
 				value={search}
 				onChange={handleChange}
 				className={style.search}
-				placeholder="The Witcher 3: Wild Hunt"
+				placeholder="The Witcher 3: Wild Hunt..."
 			/>
 		</form>
 	);

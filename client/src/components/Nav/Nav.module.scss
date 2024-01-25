@@ -3,6 +3,7 @@
 
 .nav {
     background-color: rgba(0, 0, 0, 0.315);
+    font-size: 0.7rem;
     min-height: 50px;
     max-width: 100%;
     padding: 0px 14px;
@@ -20,7 +21,7 @@
         display: flex;
         padding-bottom: 10px;
         padding-top: 5px;
-        width: 55px;
+        width: 75px;
     }
 }
 
@@ -57,7 +58,7 @@
     color: white;
 
     &:hover {
-        color: yellowgreen;
+        color: purple;
         transform: scale(1.2);
         transition-duration: 0.5s;
     }

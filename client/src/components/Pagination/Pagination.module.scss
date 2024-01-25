@@ -1,0 +1,58 @@
+.container_pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.page {
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: .8rem;
+    font-weight: bolder;
+
+    color: rgb(255, 255, 255);
+    letter-spacing: 2px;
+    background: linear-gradient(to top left,
+            rgba(128, 0, 128),
+            rgb(0, 80, 255));
+    box-shadow: 0 0 10px 5px purple;
+    width: 100px;
+    height: 35px;
+    margin: 10px;
+}
+
+.button_page {
+    margin-right: 5px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(to top right,
+            rgba(128, 0, 128),
+            rgba(0, 80, 255));
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px rgb(255, 0, 255);
+    color: rgb(255, 255, 255);
+    font-size: .6rem;
+    font-weight: bold;
+    box-shadow: 0 0 10px 5px purple;
+    padding: 6px 10px;
+    text-decoration: none;
+    text-shadow: 0px 0px 0px #8a3e4b;
+}
+
+.button_page:hover {
+    background: linear-gradient(to bottom left,
+            rgba(128, 0, 128, 0.5),
+            rgba(0, 0, 255, 0.5));
+    background-color: rgb(59, 59, 59);
+    transform: scale(1.05);
+}
+
+.button_page:active {
+    position: relative;
+    top: 1px;
+}

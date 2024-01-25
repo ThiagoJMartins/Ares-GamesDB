@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { minPage, advancePage, maxPage } from "../../redux/actions.js";
+import style from "./Pagination.module.scss";
 
 const Pagination = () => {
 	const actualPage = useSelector((state) => state.actualPage);
@@ -22,15 +23,23 @@ const Pagination = () => {
 	}
 
 	return (
-		<div>
+		<div className={style.container_pagination}>
 			<section>
-				<button onClick={onMinPage}>{"|<"}</button>
-				<button onClick={backPage}>{"<"}</button>
+				<button className={style.button_page} onClick={onMinPage}>
+					{"|<"}
+				</button>
+				<button className={style.button_page} onClick={backPage}>
+					{"<"}
+				</button>
 			</section>
-			<h3>{actualPage}</h3>
+			<h3 className={style.page}>{actualPage}</h3>
 			<section>
-				<button onClick={nextPage}>{">"}</button>
-				<button onClick={onMaxPage}>{">|"}</button>
+				<button className={style.button_page} onClick={nextPage}>
+					{">"}
+				</button>
+				<button className={style.button_page} onClick={onMaxPage}>
+					{">|"}
+				</button>
 			</section>
 		</div>
 	);

@@ -31,7 +31,7 @@ const Detail = () => {
 					genres={detail.genres}
 				/>
 			) : (
-				<div class="spinner"></div>
+				<div>Loading</div>
 			)}
 		</div>
 	);
