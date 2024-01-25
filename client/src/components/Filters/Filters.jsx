@@ -34,7 +34,7 @@ const Filters = () => {
 				className={style.selectFilter}
 				onChange={handleFilterOrigin}
 				value={selectOrigin}>
-				<option value="ALL">All</option>
+				<option value="ALL">All Origins</option>
 				<option value="API">Api</option>
 				<option value="DB">DataBase</option>
 			</select>
