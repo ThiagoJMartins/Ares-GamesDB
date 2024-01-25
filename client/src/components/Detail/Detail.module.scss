@@ -1,4 +1,3 @@
-@import "../../styles/variables.scss";
 @import "../../styles/mixins.scss";
 
 .detailContainer {
@@ -8,38 +7,14 @@
     margin: 10px;
 }
 
-.spinner {
-    width: 56px;
-    height: 56px;
-    display: grid;
-    border: 4.5px solid #0000;
-    border-radius: 50%;
-    border-color: #010779 #0000;
-    animation: spinner-e04l1k 1s infinite linear;
+.loading {
+    height: 80vh;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.spinner::before,
-.spinner::after {
-    content: "";
-    grid-area: 1/1;
-    margin: 2.2px;
-    border: inherit;
-    border-radius: 50%;
-}
-
-.spinner::before {
-    border-color: #03a118 #0000;
-    animation: inherit;
-    animation-duration: 0.5s;
-    animation-direction: reverse;
-}
-
-.spinner::after {
-    margin: 8.9px;
-}
-
-@keyframes spinner-e04l1k {
-    100% {
-        transform: rotate(1turn);
-    }
+.sonic {
+    transform: scaleX(-1);
 }

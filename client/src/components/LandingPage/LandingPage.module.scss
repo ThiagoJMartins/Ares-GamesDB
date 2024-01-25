@@ -6,100 +6,100 @@
     align-items: center;
     background: url("./bg-landing.jpg");
     background-size: cover;
-}
 
-h1 {
-    font-size: 2.5rem;
-    color: rgb(255, 187, 0);
-    text-shadow: 0px 0px 5px violet;
-    background-color: rgba(0, 0, 0, 0.445);
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0px 0px 5px purple;
+    h1 {
+        font-size: 2.5rem;
+        color: rgb(255, 187, 0);
+        text-shadow: 0px 0px 5px violet;
+        background-color: rgba(0, 0, 0, 0.445);
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0px 0px 5px purple;
 
-}
-
-h1:hover {
-    box-shadow: 0px 0px 10px rgb(255, 0, 255);
-    transform: scale(1.1);
-    transition-duration: 0.5s;
-}
-
-h1:not(:hover) {
-    box-shadow: 0px 0px 5px purple;
-    transform: scale(1);
-    transition-duration: 0.5s;
-}
-
-
-.p {
-    font-size: 0.75rem;
-    font-weight: bold;
-    text-align: center;
-    color: rgb(1 253 255);
-    text-shadow: 0px 0px 5px rgb(255, 0, 0);
-    background-color: rgba(0, 0, 0, 0.445);
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0px 0px 5px purple;
-    animation: rotar 1.275s ease-in-out infinite;
-}
-
-.hit {
-    display: flex;
-    flex-direction: column;
-}
-
-@keyframes rotar {
-    0% {
-        transform: rotate(0deg);
     }
 
-    25% {
-        transform: rotate(0deg);
+    h1:hover {
+        box-shadow: 0px 0px 10px rgb(255, 0, 255);
+        transform: scale(1.1);
+        transition-duration: 0.5s;
     }
 
-    50% {
-        transform: rotate(15deg);
+    h1:not(:hover) {
+        box-shadow: 0px 0px 5px purple;
+        transform: scale(1);
+        transition-duration: 0.5s;
     }
 
-    100% {
-        transform: rotate(0deg);
+
+    .p {
+        font-size: 0.75rem;
+        font-weight: bold;
+        text-align: center;
+        color: rgb(1 253 255);
+        text-shadow: 0px 0px 5px rgb(255, 0, 0);
+        background-color: rgba(0, 0, 0, 0.445);
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0px 0px 5px purple;
+        animation: rotar 1.275s ease-in-out infinite;
     }
-}
 
-.p::before {
-    content: "";
-    position: absolute;
-    animation: rotar 1.275s ease-in-out infinite;
-}
+    .hit {
+        display: flex;
+        flex-direction: column;
+    }
 
-.p::after {
-    content: "";
-    position: absolute;
-    border-radius: 10%;
-}
+    @keyframes rotar {
+        0% {
+            transform: rotate(0deg);
+        }
 
-.start_btn {
-    font-size: 2rem;
-    text-align: center;
-    display: inline-block;
-    margin: 7px;
-    font-weight: bold;
-    padding: 15px 10px 15px 15px;
-    background-color: lightgray;
-    text-shadow: -1px -1px black, 1px 1px white;
-    color: gray;
-    -webkit-border-radius: 7px;
-    -moz-border-radius: 7px;
-    -o-border-radius: 7px;
-    border-radius: 7px;
-    box-shadow: 0 .2em rgb(85, 85, 85);
-    cursor: pointer;
-}
+        25% {
+            transform: rotate(0deg);
+        }
 
-.start_btn:active {
-    box-shadow: none;
-    position: relative;
-    top: .2em;
+        50% {
+            transform: rotate(15deg);
+        }
+
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+
+    .p::before {
+        content: "";
+        position: absolute;
+        animation: rotar 1.275s ease-in-out infinite;
+    }
+
+    .p::after {
+        content: "";
+        position: absolute;
+        border-radius: 10%;
+    }
+
+    .start_btn {
+        font-size: 2rem;
+        text-align: center;
+        display: inline-block;
+        margin: 7px;
+        font-weight: bold;
+        padding: 15px 10px 15px 15px;
+        background-color: lightgray;
+        text-shadow: -1px -1px black, 1px 1px white;
+        color: gray;
+        -webkit-border-radius: 7px;
+        -moz-border-radius: 7px;
+        -o-border-radius: 7px;
+        border-radius: 7px;
+        box-shadow: 0 .2em rgb(85, 85, 85);
+        cursor: pointer;
+    }
+
+    .start_btn:active {
+        box-shadow: none;
+        position: relative;
+        top: .2em;
+    }
 }

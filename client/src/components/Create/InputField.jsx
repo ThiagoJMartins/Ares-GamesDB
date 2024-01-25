@@ -1,4 +1,5 @@
 import React from "react";
+import style from "./InputField.module.scss";
 
 const InputField = ({
 	label,
@@ -11,8 +12,10 @@ const InputField = ({
 	error,
 }) => {
 	return (
-		<div>
-			<label htmlFor={name}>{label}</label>
+		<div className={style.container}>
+			<label htmlFor={name} className={style.label}>
+				{label}
+			</label>
 			<input
 				type={type}
 				name={name}
@@ -20,8 +23,9 @@ const InputField = ({
 				onBlur={onBlur}
 				onChange={onChange}
 				value={value}
+				className={style.input}
 			/>
-			{error && <p>{error}</p>}
+			{error && <p className={style.error}>{error}</p>}
 		</div>
 	);
 };

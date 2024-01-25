@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getVideogameById, resetVideogame } from "../../redux/actions";
 import Videogame from "../Videogame/Videogame";
+import sonic from "/sonic.gif";
 import style from "./Detail.module.scss";
 
 const Detail = () => {
@@ -18,7 +19,7 @@ const Detail = () => {
 	}, [id]);
 
 	return (
-		<div className={style.detailContainer}>
+		<div className={detail.name ? style.detailContainer : style.loading}>
 			{detail.name ? (
 				<Videogame
 					id={detail.id}
@@ -31,7 +32,9 @@ const Detail = () => {
 					genres={detail.genres}
 				/>
 			) : (
-				<div>Loading</div>
+				<div className={style.sonic}>
+					<img src={sonic} alt="Sonic Loading" width="300px" height="300px" />
+				</div>
 			)}
 		</div>
 	);

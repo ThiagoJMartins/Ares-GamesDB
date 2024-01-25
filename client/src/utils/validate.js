@@ -1,4 +1,4 @@
-const validate = (data, name, value) => {
+const validate = (data, name) => {
 	let errors = {};
 
 	const errorMessage = (field, message) => {

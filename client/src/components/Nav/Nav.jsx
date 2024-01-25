@@ -1,42 +1,30 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 //!----------------------------------------------------+/
-import logo from "/logo.svg";
+import star from "/star.gif";
 import style from "./Nav.module.scss";
 //!----------------------------------------------------+/
 
 const Nav = () => {
+	const { pathname } = useLocation();
+
 	return (
 		<div className={style.nav}>
 			<Link to="/">
-				<img className={style.image} src={logo} alt="Ares_GamesDB" />
+				<img className={style.image} src={star} alt="Ares_GamesDB" />
 			</Link>
-			<SearchBar />
+			{pathname === "/home" && <SearchBar />}
 			<div className={style.links}>
 				<ul className={style.ul}>
 					<li>
-						<NavLink
-							to="/create"
-							className={style.li}
-							activeClassName={style.activeLink}>
+						<Link to="/create" className={style.li}>
 							Create
-						</NavLink>
+						</Link>
 					</li>
 					<li>
-						<NavLink
-							to="/about"
-							className={style.li}
-							activeClassName={style.activeLink}>
-							About
-						</NavLink>
-					</li>
-					<li>
-						<NavLink
-							to="/home"
-							className={style.li}
-							activeClassName={style.activeLink}>
+						<Link to="/home" className={style.li}>
 							Home
-						</NavLink>
+						</Link>
 					</li>
 				</ul>
 			</div>

@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getVideogames, getGenres } from "../../redux/actions";
+import { Link } from "react-router-dom";
 import style from "./Home.module.scss";
 import Videogame from "../Videogame/Videogame";
 import Pagination from "../Pagination/Pagination";
@@ -31,9 +32,8 @@ const Home = () => {
 	const renderVideogames = () => {
 		{
 			return videogames.length !== 0 ? (
-				videogames
-					.slice(start, end)
-					.map((game, index) => (
+				videogames.slice(start, end).map((game, index) => (
+					<Link to={`/videogame/${game.id}`}>
 						<Videogame
 							key={index}
 							id={game.id}
@@ -43,7 +43,8 @@ const Home = () => {
 							released={game.released}
 							rating={game.metacritic}
 						/>
-					))
+					</Link>
+				))
 			) : (
 				<div className={style.sonic}>
 					<img

@@ -1,0 +1,45 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.label {
+    color: white;
+    text-shadow: 0px 0px 10px purple;
+}
+
+.select {
+    padding: 3px 6px;
+    margin: 0px 10px;
+    font-size: .7rem;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(255, 255, 255);
+    text-shadow: 0px 0px 10px purple;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    text-align: center;
+}
+
+.select:hover {
+    box-shadow: 0 5px 5px purple;
+    border: none;
+    outline: none;
+}
+
+.option {
+    padding: 10px;
+    color: white;
+    background-color: rgba(31, 31, 31, 0.856);
+}
+
+.error {
+    padding-top: .5rem;
+    color: red;
+    font-size: .6rem;
+    letter-spacing: .15rem;
+    text-shadow: 1px 1px 5px black;
+}

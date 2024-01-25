@@ -1,4 +1,3 @@
-@import "../../styles/variables.scss";
 @import "../../styles/mixins.scss";
 
 .nav {
@@ -19,9 +18,10 @@
 
     .image {
         display: flex;
+        margin-right: 150px;
         padding-bottom: 10px;
         padding-top: 5px;
-        width: 75px;
+        width: 50px;
     }
 }
 
@@ -56,6 +56,8 @@
     display: flex;
     padding: 10px;
     color: white;
+    text-decoration: none;
+    align-items: center;
 
     &:hover {
         color: purple;
@@ -67,9 +69,4 @@
         transform: scale(1);
         transition-duration: 0.5s;
     }
-}
-
-.activeLink {
-    color: yellowgreen;
-    font-weight: bold;
 }

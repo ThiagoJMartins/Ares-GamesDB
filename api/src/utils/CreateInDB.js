@@ -27,7 +27,7 @@ const CreateInDB = async (
 	await newGame.setGenres(genresVG);
 
 	const data = await Videogame.findOne({
-		where: { name: name },
+		where: { id: newGame.dataValues.id },
 		include: Genres,
 	});
 
