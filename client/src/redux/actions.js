@@ -74,7 +74,6 @@ export function postVideogame(newVg) {
 				"http://localhost:3001/videogames",
 				newVg
 			);
-			console.log(newVg);
 			return dispatch({
 				type: POSTVG,
 				payload: data,

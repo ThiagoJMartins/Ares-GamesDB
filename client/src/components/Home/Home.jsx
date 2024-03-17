@@ -33,7 +33,7 @@ const Home = () => {
 		{
 			return videogames.length !== 0 ? (
 				videogames.slice(start, end).map((game, index) => (
-					<Link to={`/videogame/${game.id}`}>
+					<Link key={index} to={`/videogame/${game.id}`}>
 						<Videogame
 							key={index}
 							id={game.id}
