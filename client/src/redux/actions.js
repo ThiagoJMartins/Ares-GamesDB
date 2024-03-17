@@ -15,14 +15,13 @@ import {
 	ORDERRATING,
 	RESET,
 } from "./action-types.js";
-
+const URL = import.meta.env.VITE_URL;
 //*VIDEOGAMES
 
 export function getVideogames() {
 	return async (dispatch) => {
 		try {
-			const { data } = await axios.get("http://localhost:3001/videogames");
-
+			const { data } = await axios.get(`${URL}/videogames`);
 			return dispatch({
 				type: GETALLVG,
 				payload: data,
@@ -36,9 +35,7 @@ export function getVideogameByName(name) {
 	return async (dispatch) => {
 		try {
 			const fixedName = name.replaceAll(" ", "-");
-			const { data } = await axios.get(
-				`http://localhost:3001/videogames?name=${fixedName}`
-			);
+			const { data } = await axios.get(`${URL}/videogames?name=${fixedName}`);
 			console.log(data);
 			return dispatch({
 				type: GETVGNAME,
@@ -53,9 +50,7 @@ export function getVideogameByName(name) {
 export function getVideogameById(id) {
 	return async (dispatch) => {
 		try {
-			const { data } = await axios.get(
-				`http://localhost:3001/videogames/${id}`
-			);
+			const { data } = await axios.get(`${URL}/videogames/${id}`);
 
 			return dispatch({
 				type: GETVGDETAIL,
@@ -70,10 +65,7 @@ export function getVideogameById(id) {
 export function postVideogame(newVg) {
 	return async (dispatch) => {
 		try {
-			const { data } = await axios.post(
-				"http://localhost:3001/videogames",
-				newVg
-			);
+			const { data } = await axios.post(`${URL}/videogames`, newVg);
 			return dispatch({
 				type: POSTVG,
 				payload: data,
@@ -96,7 +88,7 @@ export function resetVideogame() {
 export function getGenres() {
 	return async function (dispatch) {
 		try {
-			const genresSearch = axios.get(`http://localhost:3001/genres`);
+			const genresSearch = axios.get(`${URL}/genres`);
 			return dispatch({
 				type: GETGENRES,
 				payload: (await genresSearch).data,
